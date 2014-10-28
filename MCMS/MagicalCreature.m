@@ -1,15 +1,13 @@
 //
-//  ViewController.h
+//  MagicalCreature.m
 //  MCMS
 //
 //  Created by Andrew Liu on 10/28/14.
 //  Copyright (c) 2014 Andrew Liu. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "MagicalCreature.h"
 
-@interface ViewController : UIViewController
-
+@implementation MagicalCreature
 
 @end
-
