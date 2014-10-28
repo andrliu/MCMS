@@ -7,6 +7,8 @@
 //
 
 #import "RootViewController.h"
+#import "CreatureViewController.h"
+#import "MagicalCreature.h"
 
 @interface RootViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 //moved it from .h
@@ -20,7 +22,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.creatures = [@[@"Vampire", @"Werewolf", @"Shapeshifter"] mutableCopy];
+//    self.creatures = [@[@"Vampire", @"Werewolf", @"Shapeshifter"] mutableCopy];
+    self.creatures = [NSMutableArray array];
+    MagicalCreature *objectOne = [[MagicalCreature alloc]initWithName:@"Archer"];
+    [self.creatures addObjectsFromArray:@[objectOne]];
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -32,20 +38,31 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
-    cell.textLabel.text = self.creatures[indexPath.row];
-
+    MagicalCreature *creature = self.creatures[indexPath.row];
+    cell.textLabel.text = creature.name;
     return cell;
 }
+
 - (IBAction)onButtonPressedAddCreature:(UIBarButtonItem *)sender
 {
-    NSString *creature = self.creatureTextField.text;
-    [self.creatures addObject:creature];
-    self.creatureTextField.text = @"";
-    [self.creatureTextField resignFirstResponder];
+    MagicalCreature *creature = self.creatureTextField.text;  //textfiled to local variable
+//    [self.creatures addObject:creature];                //add local vaiable to array
+
+
+
+    self.creatureTextField.text = @"";                  //reset textfield
+    [self.creatureTextField resignFirstResponder];      //dismiss keyboard
     [self.creatureTableView reloadData];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    CreatureViewController *vc = segue.destinationViewController;
+    NSInteger rowNumber = [self.creatureTableView indexPathForSelectedRow].row;
+/////come back soon
+
+
+}
 
 
 @end
