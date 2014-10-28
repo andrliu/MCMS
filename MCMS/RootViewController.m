@@ -12,6 +12,7 @@
 //moved it from .h
 @property NSMutableArray *creatures;
 @property (weak, nonatomic) IBOutlet UITextField *creatureTextField;
+@property (strong, nonatomic) IBOutlet UITableView *creatureTableView;
 
 @end
 
@@ -35,6 +36,14 @@
     cell.textLabel.text = self.creatures[indexPath.row];
 
     return cell;
+}
+- (IBAction)onButtonPressedAddCreature:(UIBarButtonItem *)sender
+{
+    NSString *creature = self.creatureTextField.text;
+    [self.creatures addObject:creature];
+    self.creatureTextField.text = @"";
+    [self.creatureTextField resignFirstResponder];
+    [self.creatureTableView reloadData];
 }
 
 

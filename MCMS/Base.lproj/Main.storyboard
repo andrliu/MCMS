@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6245" systemVersion="14A389" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="v6x-oC-jF2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="v6x-oC-jF2">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6238"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
@@ -30,12 +30,15 @@
                                     </connections>
                                 </textField>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="kD9-ZY-luf">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" id="kD9-ZY-luf">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="kD9-ZY-luf" id="Guy-NZ-Hxu">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="Fk0-n4-DjH" kind="push" identifier="ShowCreatureSegue" id="LJt-hp-Wo5"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -53,15 +56,39 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="MCMS Battle" id="Baw-UR-jsg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="t51-wA-H2N"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="t51-wA-H2N">
+                            <connections>
+                                <action selector="onButtonPressedAddCreature:" destination="vXZ-lx-hvc" id="m14-dq-3ba"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="creatureTableView" destination="hj4-8W-PUi" id="WUb-Sh-BvS"/>
                         <outlet property="creatureTextField" destination="WzZ-4u-rEL" id="TNf-of-KHz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="705" y="331"/>
+            <point key="canvasLocation" x="571" y="331"/>
+        </scene>
+        <!--Creature View Controller-->
+        <scene sceneID="Svh-Rg-8ah">
+            <objects>
+                <viewController id="Fk0-n4-DjH" customClass="CreatureViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="cnf-wK-nRG"/>
+                        <viewControllerLayoutGuide type="bottom" id="dS9-Ge-BH8"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XpV-OJ-O86">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Tv4-cs-M5N"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AgG-Ta-8q4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="958" y="331"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NCH-IF-SzK">
