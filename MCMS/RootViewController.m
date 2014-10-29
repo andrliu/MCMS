@@ -11,7 +11,6 @@
 #import "MagicalCreature.h"
 
 @interface RootViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
-//moved it from .h
 @property NSMutableArray *creatures;
 @property (weak, nonatomic) IBOutlet UITextField *creatureTextField;
 @property (strong, nonatomic) IBOutlet UITableView *creatureTableView;
@@ -22,11 +21,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    self.creatures = [@[@"Vampire", @"Werewolf", @"Shapeshifter"] mutableCopy];
     self.creatures = [NSMutableArray array];
-    MagicalCreature *objectOne = [[MagicalCreature alloc]initWithName:@"Archer"];
-    [self.creatures addObjectsFromArray:@[objectOne]];
-
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -45,13 +40,10 @@
 
 - (IBAction)onButtonPressedAddCreature:(UIBarButtonItem *)sender
 {
-    MagicalCreature *creature = self.creatureTextField.text;  //textfiled to local variable
-//    [self.creatures addObject:creature];                //add local vaiable to array
-
-
-
-    self.creatureTextField.text = @"";                  //reset textfield
-    [self.creatureTextField resignFirstResponder];      //dismiss keyboard
+    MagicalCreature *creature = [[MagicalCreature alloc] initWithName:self.creatureTextField.text];
+    [self.creatures addObjectsFromArray:@[creature]];
+    self.creatureTextField.text = @"";
+    [self.creatureTextField resignFirstResponder];
     [self.creatureTableView reloadData];
 }
 
@@ -59,7 +51,7 @@
 {
     CreatureViewController *vc = segue.destinationViewController;
     NSInteger rowNumber = [self.creatureTableView indexPathForSelectedRow].row;
-/////come back soon
+    
 
 
 }
