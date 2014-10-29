@@ -10,9 +10,9 @@
 
 @interface MagicalCreature : NSObject
 @property NSString *name;
-//added to test segue
+@property NSString *detail;
 
 
--(instancetype)initWithName:(NSString *)name;
+-(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail;
 
 @end

@@ -13,6 +13,9 @@
 @interface RootViewController () <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 @property NSMutableArray *creatures;
 @property (weak, nonatomic) IBOutlet UITextField *creatureTextField;
+@property (weak, nonatomic) IBOutlet UILabel *hiddenTextFieldLabel;
+@property (weak, nonatomic) IBOutlet UITextField *creatureDetailTextField;
+@property (weak, nonatomic) IBOutlet UILabel *hiddenDetailTextFieldLabel;
 @property (strong, nonatomic) IBOutlet UITableView *creatureTableView;
 
 @end
@@ -35,15 +38,19 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     MagicalCreature *creature = self.creatures[indexPath.row];
     cell.textLabel.text = creature.name;
+    cell.detailTextLabel.text = creature.detail;
     return cell;
 }
 
 - (IBAction)onButtonPressedAddCreature:(UIBarButtonItem *)sender
 {
-    MagicalCreature *creature = [[MagicalCreature alloc] initWithName:self.creatureTextField.text];
+    MagicalCreature *creature = [[MagicalCreature alloc] initWithName:self.creatureTextField.text
+                                                           withDetail:self.creatureDetailTextField.text];
     [self.creatures addObjectsFromArray:@[creature]];
     self.creatureTextField.text = @"";
+    self.creatureDetailTextField.text = @"";
     [self.creatureTextField resignFirstResponder];
+    [self.creatureDetailTextField resignFirstResponder];
     [self.creatureTableView reloadData];
 }
 
@@ -59,11 +66,20 @@
 
 - (IBAction)onEditButtonPressed:(UIBarButtonItem *)editButton
 {
-    self.creatureTableView.editing = !self.creatureTableView.editing;
     if ([editButton.title isEqualToString:@"Edit"]) {
         editButton.title = @"Done";
+        self.creatureTextField.hidden = NO;
+        self.hiddenTextFieldLabel.hidden = YES;
+        self.creatureDetailTextField.hidden = NO;
+        self.hiddenDetailTextFieldLabel.hidden = YES;
+
+
     } else {
         editButton.title = @"Edit";
+        self.hiddenTextFieldLabel.hidden = NO;
+        self.creatureTextField.hidden = YES;
+        self.hiddenDetailTextFieldLabel.hidden = NO;
+        self.creatureDetailTextField.hidden = YES;
     }
 
 }
