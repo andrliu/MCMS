@@ -44,8 +44,11 @@
 
 - (IBAction)onButtonPressedAddCreature:(UIBarButtonItem *)sender
 {
+    //I ave a question here about implementing NSMutableArray with accessory objects
+    //Confusion on why can't use Custom class to classify object.
+    NSMutableArray *accessoryArray = [@[@"Sword", @"Mace", @"Potion", @"Toys", @"Spell"]mutableCopy];
     MagicalCreature *creature = [[MagicalCreature alloc] initWithName:self.creatureTextField.text
-                                                           withDetail:self.creatureDetailTextField.text];
+                                                           withDetail:self.creatureDetailTextField.text withAccessory:accessoryArray];
     [self.creatures addObjectsFromArray:@[creature]];
     self.creatureTextField.text = @"";
     self.creatureDetailTextField.text = @"";
