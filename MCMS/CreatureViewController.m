@@ -64,17 +64,17 @@
     float i = arc4random_uniform(100)/100.0;
 
 
-    if (i < 0.25) {
+    if (i < 0.2) {
         cell.textLabel. text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[0]];
     }
-    else if ( 0.25 <= i && i <0.5){
+    else if ( 0.2 <= i && i <0.4){
     cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[1]];
     }
-    else if ( 0.5 <= i && i <0.75){
+    else if ( 0.4 <= i && i <0.6){
         cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[2]];
     }
 
-    else if ( 0.75 <= i && i <0.90){
+    else if ( 0.6 <= i && i <0.80){
         cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[3]];
     }
     else {
