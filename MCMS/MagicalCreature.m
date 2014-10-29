@@ -10,6 +10,14 @@
 
 @implementation MagicalCreature
 
+-(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail;
+{
+    self = [super init];
+    self.name = name;
+    self.detail = detail;
+    return self;
+}
+
 -(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray;
 {
     self = [super init];

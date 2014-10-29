@@ -25,8 +25,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.creatures = [NSMutableArray array];
-//    MagicalCreature *creatureOne = [[MagicalCreature alloc] initWithName:@"Elf" withDetail:@"Elf" withAccessory: withDamageValue:70];
-//    [self.creatures addObjectsFromArray:@[creatureOne]];
+    NSMutableArray *accessoryArray = [@[@"Sword", @"Mace", @"Potion", @"Toys", @"Crown"]mutableCopy];
+    MagicalCreature *objectElf = [[MagicalCreature alloc]initWithName:@"Elf" withDetail:@"Elf" withAccessory:accessoryArray];
+    MagicalCreature *objectGrinch = [[MagicalCreature alloc]initWithName:@"Grinch" withDetail:@"Grinch" withAccessory:accessoryArray];
+    MagicalCreature *objectMagician = [[MagicalCreature alloc]initWithName:@"Magician" withDetail:@"Magician" withAccessory:accessoryArray];
+    [self.creatures addObjectsFromArray:@[objectElf,objectGrinch,objectMagician]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -48,7 +51,7 @@
 {
     //I ave a question here about implementing NSMutableArray with accessory objects
     //Confusion on why can't use Custom class to classify object.
-    NSMutableArray *accessoryArray = [@[@"Sword", @"Mace", @"Potion", @"Toys", @"Spell"]mutableCopy];
+    NSMutableArray *accessoryArray = [@[@"Sword", @"Mace", @"Potion", @"Toys", @"Crown"]mutableCopy];
     MagicalCreature *creature = [[MagicalCreature alloc] initWithName:self.creatureTextField.text
                                                            withDetail:self.creatureDetailTextField.text withAccessory:accessoryArray];
     [self.creatures addObjectsFromArray:@[creature]];

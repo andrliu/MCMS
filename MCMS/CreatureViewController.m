@@ -74,11 +74,15 @@
         cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[2]];
     }
 
-    else if ( 0.75 <= i && i <1){
+    else if ( 0.75 <= i && i <0.90){
         cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[3]];
     }
     else {
         cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[4]];
+        UIAlertController *startSign = [UIAlertController alertControllerWithTitle:@"" message: @"you got the CROWN!!!" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *challengeButton = [UIAlertAction actionWithTitle:@"Try Again" style:UIAlertActionStyleDefault handler:nil];
+        [startSign addAction:challengeButton];
+        [self presentViewController: startSign animated:YES completion:nil];
     }
 
     return cell;
