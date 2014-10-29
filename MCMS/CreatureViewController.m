@@ -21,30 +21,32 @@
 
     self.navigationItem.title = self.magicalCreature.name;
 
-    if ([self.magicalCreature.detail isEqualToString:@"Elf"])
-    {
-        self.creatureImageView.image = [UIImage imageNamed:@"elf"];
-    }
+    
 
-    else if ([self.magicalCreature.detail isEqualToString:@"Magician"])
-    {
-        self.creatureImageView.image = [UIImage imageNamed:@"magician"];
-    }
-
-    else if ([self.magicalCreature.detail isEqualToString:@"Grinch"])
-    {
-        self.creatureImageView.image = [UIImage imageNamed:@"grinch"];
-    }
-
-    else if ([self.magicalCreature.detail isEqualToString:@"Demon"])
-    {
-            self.creatureImageView.image = [UIImage imageNamed:@"demon"];
-    }
-
-    else if ([self.magicalCreature.detail isEqualToString:@"Wizard"])
-    {
-            self.creatureImageView.image = [UIImage imageNamed:@"wizard"];
-    }
+//    if ([self.magicalCreature.detail isEqualToString:@"Elf"])
+//    {
+//        self.creatureImageView.image = [UIImage imageNamed:@"elf"];
+//    }
+//
+//    else if ([self.magicalCreature.detail isEqualToString:@"Magician"])
+//    {
+//        self.creatureImageView.image = [UIImage imageNamed:@"magician"];
+//    }
+//
+//    else if ([self.magicalCreature.detail isEqualToString:@"Grinch"])
+//    {
+//        self.creatureImageView.image = [UIImage imageNamed:@"grinch"];
+//    }
+//
+//    else if ([self.magicalCreature.detail isEqualToString:@"Demon"])
+//    {
+//            self.creatureImageView.image = [UIImage imageNamed:@"demon"];
+//    }
+//
+//    else if ([self.magicalCreature.detail isEqualToString:@"Wizard"])
+//    {
+//            self.creatureImageView.image = [UIImage imageNamed:@"wizard"];
+//    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -52,12 +54,34 @@
     return 1;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessoryCell" forIndexPath:indexPath];
 
+    float j = arc4random_uniform(100)/100.0;
+
     float i = arc4random_uniform(100)/100.0;
+
+    if (j < 0.2)
+    {
+        self.creatureImageView.image = self.magicalCreature.imageArray[0];
+    }
+    else if ( 0.2 <= j && j <0.4)
+    {
+        self.creatureImageView.image = self.magicalCreature.imageArray[1];
+    }
+    else if ( 0.4 <= j && j <0.6)
+    {
+        self.creatureImageView.image = self.magicalCreature.imageArray[2];
+    }
+    else if ( 0.6 <= j && j <0.8)
+    {
+        self.creatureImageView.image = self.magicalCreature.imageArray[3];
+    }
+    else
+    {
+        self.creatureImageView.image = self.magicalCreature.imageArray[4];
+    }
 
     if (i < 0.2)
     {
@@ -65,7 +89,7 @@
     }
     else if ( 0.21 <= i && i <0.42)
     {
-    cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[1]];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[1]];
     }
     else if ( 0.42 <= i && i <0.63)
     {
@@ -79,12 +103,17 @@
     else
     {
         cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[4]];
-        UIAlertController *startSign = [UIAlertController alertControllerWithTitle:@"" message: @"you got the CROWN!!!" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *challengeButton = [UIAlertAction actionWithTitle:@"Try Again" style:UIAlertActionStyleDefault handler:nil];
+
+        UIAlertController *startSign = [UIAlertController alertControllerWithTitle:@""
+                                                                           message: @"you got the CROWN!!!"
+                                                                    preferredStyle:UIAlertControllerStyleAlert];
+
+        UIAlertAction *challengeButton = [UIAlertAction actionWithTitle:@"Try Again"
+                                                                  style:UIAlertActionStyleDefault
+                                                                handler:nil];
         [startSign addAction:challengeButton];
         [self presentViewController: startSign animated:YES completion:nil];
     }
-
     return cell;
 }
 

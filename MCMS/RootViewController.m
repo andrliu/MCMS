@@ -25,23 +25,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.creatures = [NSMutableArray array];
-    NSMutableArray *accessoryArray = [@[@"Sword", @"Mace", @"Potion", @"Toys", @"Crown"] mutableCopy];
-    MagicalCreature *objectElf = [[MagicalCreature alloc]initWithName:@"Elf"
-                                                           withDetail:@"Elf"
-                                                        withAccessory:accessoryArray];
-    MagicalCreature *objectGrinch = [[MagicalCreature alloc]initWithName:@"Grinch"
-                                                              withDetail:@"Grinch"
-                                                           withAccessory:accessoryArray];
-    MagicalCreature *objectMagician = [[MagicalCreature alloc]initWithName:@"Magician"
-                                                                withDetail:@"Magician"
-                                                             withAccessory:accessoryArray];
-    MagicalCreature *objectDemon = [[MagicalCreature alloc]initWithName:@"Demon"
-                                                             withDetail:@"Demon"
-                                                          withAccessory:accessoryArray];
-    MagicalCreature *objectWizard = [[MagicalCreature alloc]initWithName:@"Wizard"
-                                                              withDetail:@"Wizard"
-                                                           withAccessory:accessoryArray];
-    [self.creatures addObjectsFromArray:@[objectElf,objectGrinch,objectMagician,objectDemon,objectWizard]];
+//    NSMutableArray *imageArray = [@[[UIImage imageNamed:@"elf"],
+//                                    [UIImage imageNamed:@"grinch"],
+//                                    [UIImage imageNamed:@"magician"],
+//                                    [UIImage imageNamed:@"demon"],
+//                                    [UIImage imageNamed:@"wizard"]] mutableCopy];
+//    NSMutableArray *accessoryArray = [@[@"Sword",
+//                                        @"Mace",
+//                                        @"Potion",
+//                                        @"Toys",
+//                                        @"Crown"] mutableCopy];
+//    MagicalCreature *objectElf = [[MagicalCreature alloc]initWithName:@"Elf"
+//                                                           withDetail:@"Elf"
+//                                                        withAccessory:accessoryArray
+//                                                            withImage:imageArray];
+//    MagicalCreature *objectGrinch = [[MagicalCreature alloc]initWithName:@"Grinch"
+//                                                              withDetail:@"Grinch"
+//                                                           withAccessory:accessoryArray
+//                                                               withImage:imageArray];
+//    MagicalCreature *objectMagician = [[MagicalCreature alloc]initWithName:@"Magician"
+//                                                                withDetail:@"Magician"
+//                                                             withAccessory:accessoryArray
+//                                                                 withImage:imageArray];
+//    MagicalCreature *objectDemon = [[MagicalCreature alloc]initWithName:@"Demon"
+//                                                             withDetail:@"Demon"
+//                                                          withAccessory:accessoryArray
+//                                                              withImage:imageArray];
+//    MagicalCreature *objectWizard = [[MagicalCreature alloc]initWithName:@"Wizard"
+//                                                              withDetail:@"Wizard"
+//                                                           withAccessory:accessoryArray
+//                                                               withImage:imageArray];
+//    [self.creatures addObjectsFromArray:@[objectElf,objectGrinch,objectMagician,objectDemon,objectWizard]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -60,24 +74,26 @@
 
 - (IBAction)onButtonPressedAddCreature:(UIBarButtonItem *)sender
 {
-    NSMutableArray *accessoryArray = [@[@"Sword", @"Mace", @"Potion", @"Toys", @"Crown"]mutableCopy];
+    NSMutableArray *accessoryArray = [@[@"Sword",
+                                        @"Mace",
+                                        @"Potion",
+                                        @"Toys",
+                                        @"Crown"]mutableCopy];
+    NSMutableArray *imageArray = [@[[UIImage imageNamed:@"elf"],
+                                    [UIImage imageNamed:@"grinch"],
+                                    [UIImage imageNamed:@"magician"],
+                                    [UIImage imageNamed:@"demon"],
+                                    [UIImage imageNamed:@"wizard"]] mutableCopy];
     MagicalCreature *creature = [[MagicalCreature alloc] initWithName:self.creatureTextField.text
                                                            withDetail:self.creatureDetailTextField.text
-                                                        withAccessory:accessoryArray];
+                                                        withAccessory:accessoryArray
+                                                            withImage:imageArray];
     [self.creatures addObjectsFromArray:@[creature]];
     self.creatureTextField.text = @"";
     self.creatureDetailTextField.text = @"";
     [self.creatureTextField resignFirstResponder];
     [self.creatureDetailTextField resignFirstResponder];
     [self.creatureTableView reloadData];
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    CreatureViewController *vc = segue.destinationViewController;
-    NSInteger rowNumber = [self.creatureTableView indexPathForSelectedRow].row;
-    MagicalCreature *theCreature = [self.creatures objectAtIndex:rowNumber];
-    vc.magicalCreature = theCreature;
 }
 
 - (IBAction)onEditButtonPressed:(UIBarButtonItem *)editButton
@@ -98,6 +114,14 @@
         self.hiddenDetailTextFieldLabel.hidden = NO;
         self.navigationItem.rightBarButtonItem.enabled = NO;
     }
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    CreatureViewController *vc = segue.destinationViewController;
+    NSInteger rowNumber = [self.creatureTableView indexPathForSelectedRow].row;
+    MagicalCreature *theCreature = [self.creatures objectAtIndex:rowNumber];
+    vc.magicalCreature = theCreature;
 }
 
 @end

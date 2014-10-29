@@ -12,7 +12,8 @@
 @property NSString *name;
 @property NSString *detail;
 @property NSMutableArray *accessoryArray;
+@property NSMutableArray *imageArray;
 
--(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray;
-
+//-(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray;
+-(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray withImage:(NSMutableArray *)imageArray;
 @end
