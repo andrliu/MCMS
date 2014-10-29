@@ -87,7 +87,6 @@
 		490F8DBD1A004A7B00776481 /* MCMS */ = {
 			isa = PBXGroup;
 			children = (
-				490F8DE71A004B4900776481 /* Model */,
 				490F8DC21A004A7B00776481 /* AppDelegate.h */,
 				490F8DC31A004A7B00776481 /* AppDelegate.m */,
 				490F8DC51A004A7B00776481 /* RootViewController.h */,
@@ -97,6 +96,7 @@
 				490F8DC81A004A7B00776481 /* Main.storyboard */,
 				490F8DCB1A004A7B00776481 /* Images.xcassets */,
 				490F8DCD1A004A7B00776481 /* LaunchScreen.xib */,
+				490F8DE71A004B4900776481 /* Model */,
 				490F8DBE1A004A7B00776481 /* Supporting Files */,
 			);
 			path = MCMS;

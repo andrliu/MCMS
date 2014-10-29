@@ -51,10 +51,21 @@
 {
     CreatureViewController *vc = segue.destinationViewController;
     NSInteger rowNumber = [self.creatureTableView indexPathForSelectedRow].row;
-    
+    MagicalCreature *theCreature = [self.creatures objectAtIndex:rowNumber];
+    vc.magicalCreature = theCreature;
 
 
 }
 
+- (IBAction)onEditButtonPressed:(UIBarButtonItem *)editButton
+{
+    self.creatureTableView.editing = !self.creatureTableView.editing;
+    if ([editButton.title isEqualToString:@"Edit"]) {
+        editButton.title = @"Done";
+    } else {
+        editButton.title = @"Edit";
+    }
+
+}
 
 @end
