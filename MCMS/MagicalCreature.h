@@ -13,8 +13,6 @@
 @property NSString *detail;
 @property NSMutableArray *accessoryArray;
 
--(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail;
-
 -(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray;
 
 @end
