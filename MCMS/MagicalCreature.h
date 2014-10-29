@@ -14,6 +14,7 @@
 @property NSMutableArray *accessoryArray;
 
 
+
 -(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray;
 
 @end

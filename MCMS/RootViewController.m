@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.creatures = [NSMutableArray array];
+//    MagicalCreature *creatureOne = [[MagicalCreature alloc] initWithName:@"Elf" withDetail:@"Elf" withAccessory: withDamageValue:70];
+//    [self.creatures addObjectsFromArray:@[creatureOne]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

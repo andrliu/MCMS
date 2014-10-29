@@ -9,10 +9,10 @@
 #import "CreatureViewController.h"
 #import "MagicalCreature.h"
 
-@interface CreatureViewController ()<UITabBarDelegate, UITableViewDataSource>
+@interface CreatureViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UIImageView *creatureImageView;
 
-@property (strong, nonatomic) IBOutlet UIImageView *creatureImageView;
-@property (strong, nonatomic) IBOutlet UITableView *accessoryTableView;
+@property (weak, nonatomic) IBOutlet UITableViewCell *accessoryCell;
 
 
 
@@ -54,16 +54,33 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.creatures.count;
+    return 1;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    MagicalCreature *creature = self.creatures[indexPath.row];
-    cell.textLabel.text = creature.name;
-    cell.detailTextLabel.text = creature.detail;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessoryCell" forIndexPath:indexPath];
+    float i = arc4random_uniform(100)/100.0;
+
+
+    if (i < 0.25) {
+        cell.textLabel. text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[0]];
+    }
+    else if ( 0.25 <= i && i <0.5){
+    cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[1]];
+    }
+    else if ( 0.5 <= i && i <0.75){
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[2]];
+    }
+
+    else if ( 0.75 <= i && i <1){
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[3]];
+    }
+    else {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[4]];
+    }
+
     return cell;
 }
 
