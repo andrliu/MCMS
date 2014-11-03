@@ -7,116 +7,144 @@
 //
 
 #import "CreatureViewController.h"
+#import "BattleViewController.h"
 #import "MagicalCreature.h"
 
 @interface CreatureViewController ()<UITableViewDelegate, UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 @property (weak, nonatomic) IBOutlet UIImageView *creatureImageView;
+@property (weak, nonatomic) IBOutlet UILabel *currentDetail;
+@property NSMutableArray *creatureAccessory;
+@property MagicalCreature *angel;
+@property MagicalCreature *phoenix;
+@property MagicalCreature *troll;
+@property MagicalCreature *giant;
 
 @end
 
 @implementation CreatureViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     self.navigationItem.title = self.magicalCreature.name;
-
-    
-
-//    if ([self.magicalCreature.detail isEqualToString:@"Elf"])
-//    {
-//        self.creatureImageView.image = [UIImage imageNamed:@"elf"];
-//    }
-//
-//    else if ([self.magicalCreature.detail isEqualToString:@"Magician"])
-//    {
-//        self.creatureImageView.image = [UIImage imageNamed:@"magician"];
-//    }
-//
-//    else if ([self.magicalCreature.detail isEqualToString:@"Grinch"])
-//    {
-//        self.creatureImageView.image = [UIImage imageNamed:@"grinch"];
-//    }
-//
-//    else if ([self.magicalCreature.detail isEqualToString:@"Demon"])
-//    {
-//            self.creatureImageView.image = [UIImage imageNamed:@"demon"];
-//    }
-//
-//    else if ([self.magicalCreature.detail isEqualToString:@"Wizard"])
-//    {
-//            self.creatureImageView.image = [UIImage imageNamed:@"wizard"];
-//    }
+    self.currentDetail.text = self.magicalCreature.detail;
+    self.creatureImageView.image = self.magicalCreature.image;
+    self.creatureAccessory = self.magicalCreature.accessoryArray;
 }
+
+//- (void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:animated];
+//
+//    self.navigationItem.title = self.magicalCreature.name;
+//    self.currentDetail.text = self.magicalCreature.detail;
+//    self.creatureImageView.image = self.magicalCreature.image;
+//    self.creatureAccessory = self.magicalCreature.accessoryArray;
+//
+//    
+//}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 1;
+    return self.creatureAccessory.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"accessoryCell" forIndexPath:indexPath];
-
-    float j = arc4random_uniform(100)/100.0;
-
-    float i = arc4random_uniform(100)/100.0;
-
-    if (j < 0.2)
-    {
-        self.creatureImageView.image = self.magicalCreature.imageArray[0];
-    }
-    else if ( 0.2 <= j && j <0.4)
-    {
-        self.creatureImageView.image = self.magicalCreature.imageArray[1];
-    }
-    else if ( 0.4 <= j && j <0.6)
-    {
-        self.creatureImageView.image = self.magicalCreature.imageArray[2];
-    }
-    else if ( 0.6 <= j && j <0.8)
-    {
-        self.creatureImageView.image = self.magicalCreature.imageArray[3];
-    }
-    else
-    {
-        self.creatureImageView.image = self.magicalCreature.imageArray[4];
-    }
-
-    if (i < 0.2)
-    {
-        cell.textLabel. text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[0]];
-    }
-    else if ( 0.21 <= i && i <0.42)
-    {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[1]];
-    }
-    else if ( 0.42 <= i && i <0.63)
-    {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[2]];
-    }
-
-    else if ( 0.63 <= i && i <0.84)
-    {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[3]];
-    }
-    else
-    {
-        cell.textLabel.text = [NSString stringWithFormat:@"%@",self.magicalCreature.accessoryArray[4]];
-
-        UIAlertController *startSign = [UIAlertController alertControllerWithTitle:@""
-                                                                           message: @"you got the CROWN!!!"
-                                                                    preferredStyle:UIAlertControllerStyleAlert];
-
-        UIAlertAction *challengeButton = [UIAlertAction actionWithTitle:@"Try Again"
-                                                                  style:UIAlertActionStyleDefault
-                                                                handler:nil];
-        [startSign addAction:challengeButton];
-        [self presentViewController: startSign animated:YES completion:nil];
-    }
+    MagicalCreature *creatureAccessories = self.creatureAccessory[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", creatureAccessories];
     return cell;
 }
 
+- (IBAction)editCreatureOnButtonPressed:(UIButton *)sender
+{
+    UIAlertController *creatureList = [UIAlertController alertControllerWithTitle:@"Creature List"
+                                                                          message: nil
+                                                                   preferredStyle:UIAlertControllerStyleActionSheet];
+    UIAlertAction *angel = [UIAlertAction actionWithTitle:@"Angel"
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *action) {
 
+                                                      self.magicalCreature.detail = @"Angel";
+                                                      self.magicalCreature.image = [UIImage imageNamed:@"angel"];
+                                                      self.magicalCreature.accessoryArray = [@[@"Sword",
+                                                                                  @"Wings",
+                                                                                  @"Shield"] mutableCopy];
+
+                                                      self.currentDetail.text = @"Angel";
+                                                      self.creatureImageView.image = [UIImage imageNamed:@"angel"];
+
+                                                      self.creatureAccessory = [@[@"Sword",
+                                                                                  @"Wings",
+                                                                                  @"Shield"] mutableCopy];
+                                                      [self.detailTableView reloadData];
+                                                  }];
+    [creatureList addAction:angel];
+    UIAlertAction *phoenix = [UIAlertAction actionWithTitle:@"Phoenix"
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *action) {
+
+                                                      self.magicalCreature.detail = @"Phoenix";
+                                                      self.magicalCreature.image = [UIImage imageNamed:@"phoenix"];
+                                                      self.magicalCreature.accessoryArray = [@[@"Feathers",
+                                                                                               @"Fireblood"] mutableCopy];
+
+                                                      self.currentDetail.text = @"Phoenix";
+                                                      self.creatureImageView.image = [UIImage imageNamed:@"phoenix"];
+
+                                                      self.creatureAccessory = [@[@"Feathers",
+                                                                                  @"Fireblood"] mutableCopy];
+                                                      [self.detailTableView reloadData];
+                                                  }];
+    [creatureList addAction:phoenix];
+    UIAlertAction *troll = [UIAlertAction actionWithTitle:@"Troll"
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *action) {
+
+                                                      self.magicalCreature.detail = @"Troll";
+                                                      self.magicalCreature.image = [UIImage imageNamed:@"troll"];
+                                                      self.magicalCreature.accessoryArray = [@[@"Mace",
+                                                                                               @"Skull Helmet",
+                                                                                               @"Hardskin"] mutableCopy];
+
+                                                      self.currentDetail.text = @"Troll";
+                                                      self.creatureImageView.image = [UIImage imageNamed:@"troll"];
+
+                                                      self.creatureAccessory = [@[@"Mace",
+                                                                                  @"Skull Helmet",
+                                                                                  @"Hardskin"] mutableCopy];
+                                                      [self.detailTableView reloadData];
+                                                  }];
+    [creatureList addAction:troll];
+    UIAlertAction *giant = [UIAlertAction actionWithTitle:@"Giant"
+                                                    style:UIAlertActionStyleDefault
+                                                  handler:^(UIAlertAction *action) {
+                                                      self.magicalCreature.detail = @"Giant";
+                                                      self.magicalCreature.image = [UIImage imageNamed:@"giant"];
+                                                      self.magicalCreature.accessoryArray = [@[@"Two Handed Axe"] mutableCopy];
+
+                                                      self.currentDetail.text = @"Giant";
+                                                      self.creatureImageView.image = [UIImage imageNamed:@"giant"];
+
+                                                      self.creatureAccessory = [@[@"Two Handed Axe"] mutableCopy];
+                                                      [self.detailTableView reloadData];
+                                                  }];
+
+    [creatureList addAction:giant];
+    [self presentViewController: creatureList animated:YES completion:nil];
+}
+- (IBAction)battleOnButtonPressed:(UIButton *)sender
+{
+    [self performSegueWithIdentifier:@"battleSegue" sender:self];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    BattleViewController *bvc = segue.destinationViewController;
+    bvc.creatureImage = self.creatureImageView.image;
+}
 
 @end

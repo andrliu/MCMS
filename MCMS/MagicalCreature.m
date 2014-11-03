@@ -10,22 +10,23 @@
 
 @implementation MagicalCreature
 
-//-(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray;
-//{
-//    self = [super init];
-//    self.name = name;
-//    self.detail = detail;
-//    self.accessoryArray = accessoryArray;
-//    return self;
-//}
-
--(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray withImage:(NSMutableArray *)imageArray
+-(instancetype)initWithName:(NSString *)name withDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray withImage:(UIImage *)image
 {
     self = [super init];
     self.name = name;
     self.detail = detail;
     self.accessoryArray = accessoryArray;
-    self.imageArray = imageArray;
+    self.image = image;
     return self;
 }
+
+-(instancetype)initWithDetail:(NSString *)detail withAccessory:(NSMutableArray *)accessoryArray withImage:(UIImage *)image
+{
+    self = [super init];
+    self.detail = detail;
+    self.accessoryArray = accessoryArray;
+    self.image = image;
+    return self;
+}
+
 @end
